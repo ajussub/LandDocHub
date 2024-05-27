@@ -1,0 +1,73 @@
+
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceDetails</title>
+</head>
+
+<body>
+    <form action="" method="post" id="UserForm"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="3" align="center" cellpadding="10">
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="txttilte" ></td>
+        </tr>
+        <tr>
+            <td>Details</td>
+            <td><textarea name="txtdetails" rows="3" cols="22"></textarea></td>
+        </tr>
+        <tr>
+            <td>Criteria</td>
+            <td><textarea name="txtcriteria" rows="3" cols="22"></textarea></td>
+        </tr>
+        <tr>
+            <td>Document</td>
+            <td><input type="file" name="fileDocs" ></td>
+        </tr>
+      
+        <tr>
+            <td colspan=2 align="center">
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>
+
+
+
+<table border="1" align="center" cellpadding="10">
+    <tr>
+        <th>Sl.No</th>
+        <th>Title</th>
+        <th>Details</th>
+        <th>Criteria</th>
+        <th>Document</th>
+        <th>Action</th>
+    </tr>
+    {% for i in serviceData %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.services_title}}</td>
+        <td>{{i.services_details}}</td>
+        <td>{{i.services_criteria}}</td>
+        <td><img src="{{i.services_document.url}}" width="150" height="150" alt=""></td>
+    
+        <td>
+            <a href="{% url 'webadmin:delService' i.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SendRequest</title>
+</head>
+<body>
+    <a href="{% url 'User:homepage' %}">Home</a>
+    <form method="post">
+        {% csrf_token %}
+    <div class="container-fluid d-bg-image">
+        <div class="d-profile">
+            <table align="center" style="color: black;" cellpadding="10px" class="d-card">
+                <tr>
+                    <td colspan="2" align="center"><img src="{{officeData.office_logo.url}}" alt="" width="50" height="50"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{officeData.office_name}}</td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td>{{officeData.office_contact}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{officeData.office_email}}</td>
+                </tr>
+                <tr>
+                    <td>ServiceType</td>
+                    <td><select name="selServiceType" id="selServiceType">
+                        <option value="--select--">--select--</option>
+                        {% for i in serviceData %}
+                        <option value="{{i.id}}">{{i.services_title}}</option>
+                        {% endfor %}
+                    </select></td>
+                </tr>
+               <tr>
+                <td id="result" colspan="2"></td>
+               </tr>
+                
+                <tr>
+                    <td>Request</td>
+                    <td><textarea name="txtrequest" rows="3" cols="22"></textarea></td>
+                </tr>
+                <tr>
+                   <td colspan="2" align="center">
+                                <input type="submit" value="SendRequest" name="btnSubmit">
+                   </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>                  
+ </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#selServiceType").change(function () {
+            var sid = $(this).val();
+            var ur = "{% url 'User:ajaxservice' %}";
+            $.ajax({
+                url: ur,
+                data: { sid: sid, },
+                success: function (data) {
+                    $("#result").html(data);
+                },
+            });
+        });
+</script>
+{% endblock content %}

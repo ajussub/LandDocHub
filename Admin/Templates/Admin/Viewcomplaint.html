@@ -1,0 +1,34 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEWCOMPLAINT</title>
+</head>
+<body>
+    <form action="" method="POST" >
+        {% csrf_token %}
+       <table border="3" align="center" cellpadding="10">
+        <tr>
+            <td>COMPLAINT_TITLE</td>
+            <td><input type="textarea" name="complaint_title" id="" value="{{complaint.complaint_title}}"></td></tr> 
+        <tr>
+            <td>COMPLAINT_CONTENT</td>
+            <td><input type="textarea" name="complaint_content" id="" value="{{complaint.complaint_content}}"></td></tr>
+        <tr>
+            <td>COMPLAINT_REPLY</td>
+            <td><input type="textarea" name="complaint_content" id="" value="{{complaint.complaint_reply}}"></td></tr>
+        <tr> 
+            <td colspan="2" align="center" >
+                <input type="submit" value="save">
+                <input type="submit" value="cancel">
+            </td>
+        </tr>
+    </form>    
+    
+</body>
+</html>
+{% endblock content %}

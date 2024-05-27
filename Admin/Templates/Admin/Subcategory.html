@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subcategory</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+    <table border="3" align="center"cellpadding="10">
+        <tr>
+            <td>category</td>
+            <td><select name="sel_category" id="">
+                <option value="">----select----</option>
+                {% for i in catob %}
+                <option value="{{i.id}}">{{ i.category_name }}</option>
+                {% endfor %}
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>subcategory</td>
+            <td><input type="text" name="subcat_name" id=""></td> 
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="save">
+                <input type="submit" value="cancel"></td>
+        </tr>
+    </table>
+    </form>
+    <table border="3" align="center" cellpadding="10">
+        <tr>
+                <td>sl_no</td>
+                <td>category</td>
+                <td>subcategory</td>
+                <td>Action</td>
+        </tr>
+        {% for i in subcatdata %} 
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.category.category_name}}</td>
+            <td>{{i.subcat_name}}</td>
+            <td>
+                <a href="{% url 'webadmin:delsubcat' i.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}   
+</body>
+</html>

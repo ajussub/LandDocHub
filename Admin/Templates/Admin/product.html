@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+</head>
+<body>
+    <form action=""method="POST">
+    {% csrf_token %}
+    <table border="3" align="center" cellpadding="10">
+        <tr>
+            <td>product_name</td>
+            <td><input type="text" name="txtproduct" id=""></td>
+        </tr>
+        <tr>
+            <td>product_code</td>
+            <td><input type="number" name="txtnum" id=""></td>
+        </tr>   
+        <tr> 
+            <td colspan="2" align="center" ><input type="submit" value="save">
+            <input type="submit" value="cancel">
+            </td>
+        </tr>
+    </table>
+</form>
+<table border="3" align="center" cellpadding="10">
+    <tr>
+        <td>sl.no</td>
+        <td>product_name</td>
+        <td>product_code</td>
+        <td>Action</td>
+    </tr>
+    {% for i in productkey %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.product_name}}</td>
+        <td>{{i.product_code}}</td>
+        <td>
+            <a href="{% url 'webadmin:delproduct' i.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

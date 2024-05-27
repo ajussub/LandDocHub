@@ -1,0 +1,33 @@
+{% extends 'Office/Header.html' %}
+{% load static %}
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table cellpadding="10">
+        <tr>
+            <td>#</td>
+            <td>Date</td>
+            <td>Message</td>
+            <td>Service</td>
+            <td>User</td>
+            <td>Action</td>
+        </tr>
+        {% for i in service %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.request_date}}</td>
+            <td>{{i.request_message}}</td>
+            <td>{{i.service.services_title}}</td>
+            <td>{{i.user.user_name}}</td>
+            <td><a href="{% url 'Office:chatpage' i.user_id %}">Chat</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

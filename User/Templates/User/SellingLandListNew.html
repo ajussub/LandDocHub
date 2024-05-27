@@ -1,0 +1,46 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SellingLandListNew</title>
+</head>
+<body>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Location</th>
+            <th>Contact</th>
+            <th>Landmark</th>
+            <th>Address</th>
+            <th>Image</th>
+            <th>Proof</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Action</th>
+        </tr>
+        {% for i in userdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.land_location}}</td>
+            <td>{{i.land_contact}}</td>
+            <td>{{i.land_landmark}}</td>
+            <td>{{i.land_address}}</td>
+            <td><img src="{{i.land_landimage.url}}" width="150" height="150" alt=""></td>
+            <td><img src="{{i.land_proof.url}}" width="150" height="150" alt=""></td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>
+                <a href="{% url 'User:acceptland' i.id %}">Active</a>
+                <a href="{% url 'User:rejectland' i.id %}">DeActive</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
+{% endblock content %}

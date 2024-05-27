@@ -1,0 +1,36 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnowledeRepository</title>
+</head>
+
+<body>
+
+
+
+<table border="1" align="center" cellpadding="10">
+    <tr>
+        <th>Sl.No</th>
+        <th>Title</th>
+        <th>Details</th>
+        <th>Document</th>
+      
+    </tr>
+    {% for i in serviceData %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.knowrepo_title}}</td>
+        <td>{{i.knowrepo_details}}</td>
+        <td><a href="{{i.knowrepo_document.url}}" download><img src="{{i.knowrepo_document.url}}"  width="150" height="150" alt="" ></a></td>
+       
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content %}

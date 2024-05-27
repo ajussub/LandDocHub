@@ -1,0 +1,60 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <td>Mesurement 1</td>
+            <td><input type="text" name="txt_cal1" id="txt_cal1" onkeyup="getCal()"></td>
+        </tr>
+        <tr>
+            <td>Mesurement 2</td>
+            <td><input type="text" name="txt_cal2" id="txt_cal2" onkeyup="getCal()"></td>
+        </tr>
+        <tr>
+            <td>Mesurement 3</td>
+            <td><input type="text" name="txt_cal3" id="txt_cal3" onkeyup="getCal()"></td>
+        </tr>
+        <tr>
+            <td>Area</td>
+            <td><input type="text" name="result" id="result" readonly value="0"></td>
+        </tr>
+        <tr>
+            <td>Cent</td>
+            <td><input type="text" name="cent" id="cent" readonly value="0"></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    function getCal() {
+
+        var m1 = document.getElementById("txt_cal1").value
+        var m2 = document.getElementById("txt_cal2").value
+        var m3 = document.getElementById("txt_cal3").value
+        if ((m1 != "") && (m2 != "") && (m3 != ""))
+        {
+            var s = (parseInt(m1) + parseInt(m2 )+ parseInt(m3))/2
+            var area = s*(s-m1)*(s-m2)*(s-m3)
+            console.log(area);
+            var a = Math.sqrt(area)
+            console.log(a);
+            var cent = a/40.471
+            document.getElementById("result").value = area
+            document.getElementById("cent").value = cent
+        }
+        else
+        {
+            document.getElementById("result").value = 0
+            document.getElementById("cent").value = 0
+        }
+    }
+</script>
+{% endblock content %}

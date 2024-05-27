@@ -1,0 +1,80 @@
+
+
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    
+    <img src="{% static 'Admin/assets/img/adminhome.png' %}" width="100%" height="100%" alt=""> <span></span>
+</body>
+</html>
+{% endblock content %}
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><a href="{% url 'webadmin:district' %}">District</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:place' %}">Place</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:adminInsertSelect' %}">AdminRegistration</a> </td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:userListNew' %}">UserListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:userListAccepted' %}">UserListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:userListRejected' %}">UserListRejected</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:OfficeListNew' %}">OfficeListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:OfficeListAccepted' %}">OfficeListAccepted</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:OfficeListRejected' %}">OfficeListRejected</a></td>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'webadmin:ComplaintListNew' %}">ComplaintListNew</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:ComplaintSolved' %}">ComplaintSolved</a></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'webadmin:UserFeedbackNew' %}">UserFeedback</a></td>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'webadmin:UserFeedbackNew' %}">UserFeedback</a></td>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'webadmin:KnowledeRepository' %}">KnowledeRepository</a></td>
+        </tr>
+
+        
+    </table>
+</body>
+</html> {% endcomment %}

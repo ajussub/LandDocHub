@@ -1,0 +1,37 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table cellpadding="10">
+        <tr>
+            <td>#</td>
+            <td>Date</td>
+            <td>Message</td>
+            <td>Service</td>
+            <td>Office</td>
+            <td>Action</td>
+        </tr>
+        {% for i in service %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.request_date}}</td>
+            <td>{{i.request_message}}</td>
+            <td>{{i.service.services_title}}</td>
+            <td>{{i.office.office_name}}</td>
+            <td>
+                <a href="{% url 'User:chatpage' i.office_id %}">Chat</a>
+                <a href="{% url 'User:rating' i.office_id %}">Rate</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

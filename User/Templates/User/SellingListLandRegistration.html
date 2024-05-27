@@ -1,0 +1,89 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SellingListLandRegistration</title>
+</head>
+
+<body>
+    <form action="" method="post" id="UserForm" data-places-url="{% url 'User:AjaxPlace' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="3" align="center" cellpadding="10">
+        <tr>
+            <td>District</td>
+            <td><select name="sel_district" id="sel_district">
+                <option value="">----select----</option>
+                {% for i in distkey %}
+                <option value="{{i.id}}">{{i.district_name}}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+            <td>Place</td>
+            <td><select name="sel_place" id="sel_place">
+                <option value="">----select----</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td><input type="text" name="txtlocation" required></td>
+        </tr>
+        <tr>
+            <td>ContactNumber</td>
+            <td><input type="text" name="txtcontact" required></td>
+        </tr>
+        <tr>
+            <td>LandMark</td>
+            <td><input type="text" name="txtlandmark" required></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                    <textarea name="txt_address" rows="2" cols="22"></textarea>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>LandImage</td>
+            <td><input type="file" name="fileLandImage" required></td>
+        </tr>
+        <tr> 
+            <td>LandProof</td>
+            <td><input type="file" name="fileLandProof" required></td>
+        </tr>
+        
+        <tr>
+            <td colspan=2 align="center">
+                <input type="submit" value="Submit" name="btnsubmit">
+                <input type="reset" value="Cancel" name="btncancel">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+</script>
+{% endblock content %}

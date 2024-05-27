@@ -1,0 +1,70 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAND</title>
+</head>
+<body>
+    <form action="" method="POST" id="UserForm" data-places-url="{% url 'Guest:AjaxPlace' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+       <table border="3" align="center" cellpadding="10">
+        <tr>
+            <td>LOCATION</td>
+            <td><input type="text" name="land_location" id=""></td></tr>
+        <tr>
+            <td>DESCRIPTION</td>
+            <td><input type="textarea" name="land_description" id=""></td>
+        </tr>
+        <tr>
+            <td>PHOTO</td>
+            <td><input type="file" name="land_photo" id=""></td>
+        </tr>
+        
+        <tr>  
+            <td>DISTRICT</td>
+            <td><select name="sel_district" id="sel_district">
+                <option value="">---select---</option>
+                {% for i in disob %}
+                <option value="{{i.id}}">{{ i.district_name }}</option>
+                {% endfor %}
+                </select></td>       
+        </tr>
+        <tr>
+            <td>PLACE</td>
+            <td><select name="txt_place" id="sel_place">
+            <option value="">---select---</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>MEASUREMENT</td>
+            <td><input type="text" name="land_measurement" id=""></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="save">
+            </td>
+        </tr>
+       </table>
+    </form>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+</script>
+{% endblock content %}

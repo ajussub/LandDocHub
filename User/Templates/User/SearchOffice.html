@@ -1,0 +1,138 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        .sub {
+            padding: 15px;
+            background-color: #E1F5FE;
+            width: fit-content;
+            border-radius: 17px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post" id="UserForm" data-places-url="{% url 'Guest:AjaxPlace' %}">
+    
+        {% csrf_token %}
+    <table border="3"align="center"cellpadding="10">
+        <tr>
+            <td>District</td>
+            <td><select name="sel_district" id="sel_district">
+                <option value="">---select---</option>
+                {%for i in disdata %}
+                <option value="{{i.id}}">{{ i.district_name }}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+            <td>PLACE</td>
+            <td><select name="sel_place" id="sel_place">
+                <option value="">----select----</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"align="center">
+            <input type="submit" value="Search">
+            </td>
+        </tr>
+    </table>
+</form>
+<div class="main">
+    {% for i,j in data %}
+    <div class="sub">
+        <div><img src="{{i.office_logo.url}}" width="100" height="100" alt=""></div>
+        <div>Name :{{i.office_name}}</div>
+        <div>Contact :{{i.office_contact}}</div>
+        <div>Email :{{i.office_email}}</div>
+        <div>Address :{{i.office_address}}</div>
+        <div>District :{{i.place.district.district_name}}</div>
+        <div>Place :{{i.place.place_name}}</div>
+        <div>
+            <div class="mb-3">
+                {% if j == 0 %}
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                {% elif j == 1 %}
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                {% elif j == 2 %}
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+
+                {% elif j == 3 %}
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                {% elif j == 4 %}
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                {% elif j == 5 %}
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                {% endif %}
+
+            </div>
+            </div>
+            <div><a href="{% url 'User:SendRequesttoOffice' i.id %}">SendRequest</a></div>
+    </div>
+    {% endfor %}
+</div> 
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+</script>
+{% endblock content %}
